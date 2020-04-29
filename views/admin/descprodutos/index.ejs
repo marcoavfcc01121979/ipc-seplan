@@ -1,0 +1,43 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+<div class="container">
+  <hr>
+  <h2>Tipos de produtos</h2>
+  <a class="btn btn-success" href="/admin/descprodutos/new">Criar novo tipo de produto</a>
+  <hr>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Tipos produtos</th>
+        <th>Produtos</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% descprodutos.forEach(descproduto => { %>
+        <tr>
+          <td><%= descproduto.id %></td>
+          <td><%= descproduto.nome_desc_produto %></td>
+          <td><%= descproduto.produto.nome_tipo_produto %></td>
+          <td>
+            <form method="POST" action="/descprodutos/delete" style="display: inline" onsubmit="confirmarDelecao(event, this)">
+              <input type="hidden" name="id" value="<%= descproduto.id %>">
+              <button class="btn btn-danger">Deletar</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('../../partials/footer.ejs') %>
+<script>
+  function confirmarDelecao(event, form){
+    event.preventDefault();
+    var decision = confirm("Você que deletar este tipo de produto?");
+    if(decision){
+      form.submit();
+    }
+  }
+</script>

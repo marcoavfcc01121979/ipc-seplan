@@ -1,0 +1,39 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+<body>
+  <div class="container">
+    <hr>
+    <h2>Pesquisa IPC</h2>
+    <a class="btn btn-success" href="/admin/ipc/new">Realizar Pesquisa</a>
+    <hr>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nome do produto</th>
+          <th>Descrição do produto</th>
+          <th>Quantidade</th>
+          <th>Preço</th>
+          <th>Data</th>
+          <th>Variação do mês</th>
+          <th>Acumulo anual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% ipc.forEach(ipc => { %>
+          <tr>
+            <th><%= ipc.id %></th>
+            <th><%= ipc.nome_produto %></th>
+            <th><%= ipc.tipo_de_produto %></th>
+            <th><%= ipc.quantidade %></th>
+            <th><%= 'R$ ' + ipc.Preco.toFixed(2) %></th>
+            <th><%= ipc.Data.toLocaleDateString(); %></th>
+            <th><%= ipc.Varia_Mes + '%' %></th>
+            <th><%= ipc.Acumulo_Ano %></th>
+          </tr>
+        <% }) %>  
+      </tbody>
+    </table>
+  </div>
+</body>
+<%- include('../../partials/footer.ejs') %>
